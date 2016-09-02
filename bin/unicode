@@ -1,0 +1,39 @@
+#!/bin/sh
+
+db=/usr/share/unicode/UnicodeData.txt
+
+unicode() {
+
+case "$1" in
+	(rawlist) shift;
+		cut -d\; -f1-2 -- "$db"
+	;;
+	(list) shift; cut -d\; -f2 -- "$db"
+	;;
+	(search) shift;
+		unicode rawsearch "$1" | cut -d\; -f2
+	;;
+	(rawsearch) shift;
+		grep -i '^[^;]\+;.*'"$1"'.*;' -- "$db"
+	;;
+	(search2codes) shift;
+		unicode rawsearch "$1" | cut -d\; -f1
+	;;
+	(getall) shift;
+		unicode search2codes "$1" | while read -r line; do
+			case "${#line}" in
+				1|2|3|4) /usr/bin/printf "$(printf '%s%s' '\u' "$line"'\n')" ;;
+				*)
+					local x="$(printf '%s%s' '\U' "$line"'\n')"
+					bash -c "printf '$x'"
+				;;
+			esac
+		done
+	;;
+	(get) shift;
+		unicode getall "$1" | head -1
+		#printf '%s\n' "$(printf '%s%s' '\u' "$(unicode search2codes "$1" | head -1)")"
+	;;
+esac
+}
+unicode "$@"
