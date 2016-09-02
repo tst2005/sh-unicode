@@ -1,3 +1,9 @@
+Sample of use
+=============
+
+Smiling characters
+------------------
+
 ```
 $ ./bin/unicode search smil
 SPESMILO SIGN
@@ -76,3 +82,41 @@ $ x="$(./bin/unicode get 'BLACK smiling')"
 $ printf '<%s>\n' "$x"
 <☻>
 ```
+
+Cats
+----
+
+```
+./bin/unicode search '\<cat\>'
+YI SYLLABLE CAT
+PHAISTOS DISC SIGN CAT
+CAT
+CAT FACE
+GRINNING CAT FACE WITH SMILING EYES
+CAT FACE WITH TEARS OF JOY
+SMILING CAT FACE WITH OPEN MOUTH
+SMILING CAT FACE WITH HEART-SHAPED EYES
+CAT FACE WITH WRY SMILE
+KISSING CAT FACE WITH CLOSED EYES
+POUTING CAT FACE
+CRYING CAT FACE
+WEARY CAT FACE
+```
+
+```
+./bin/unicode getall '\<cat\>'
+ꊶ
+𐇬
+🐈
+🐱
+😸
+😹
+😺
+😻
+😼
+😽
+😾
+😿
+🙀
+```
+
