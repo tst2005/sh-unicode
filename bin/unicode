@@ -3,7 +3,10 @@
 db=/usr/share/unicode/UnicodeData.txt
 
 unicode() {
-
+	if [ ! -f "$db" ]; then
+		echo "Please install unicode-data package"
+		return 1
+	fi
 case "$1" in
 	(rawlist) shift;
 		cut -d\; -f1-2 -- "$db"
