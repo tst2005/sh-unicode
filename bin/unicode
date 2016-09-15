@@ -34,6 +34,14 @@ case "$1" in
 		unicode getall "$1" | head -1
 		#printf '%s\n' "$(printf '%s%s' '\u' "$(unicode search2codes "$1" | head -1)")"
 	;;
+	(""|help|--help|-h)
+		echo "Usage: $0 <[raw]list|[raw]search|search2codes|get[all]> ..."
+		return 0
+	;;
+	(*)
+		echo >&2 "ERROR: unknow command $1"
+		return 1
+	;;
 esac
 }
 unicode "$@"
